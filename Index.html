@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VacantPro | National Job Search Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Clash+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563EB; /* Sophisticated blue */
+            --primary-dark: #1D4ED8;
+            --primary-light: #3B82F6;
+            --primary-ultralight: #DBEAFE;
+            --hot-pink: #EC4899; /* Professional pink */
+            --lime: #84CC16; /* Professional green */
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: #e2e8f0;
+            --lighter-gray: #f1f5f9;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 16px;
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-fast: all 0.2s cubic-bezier(0.3, 0, 0.8, 0.15);
+            --transition-slow: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f0f9ff;
+            min-height: 100vh;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(37, 99, 235, 0.02) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.02) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(132, 204, 22, 0.01) 0%, transparent 30%);
+            z-index: -2;
+            pointer-events: none;
+            animation: backgroundShift 30s infinite alternate;
+        }
+        
+        @keyframes backgroundShift {
+            0% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(1%, 1%);
+            }
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+        
+        .container {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.5rem 0;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.25);
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            animation: headerGlow 8s infinite alternate;
+        }
+        
+        @keyframes headerGlow {
+            0% { opacity: 0.6; }
+            100% { opacity: 0.8; }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: translateX(3px);
+        }
+        
+        .logo i {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, white, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .logo-text {
+            position: relative;
+            display: inline-block;
+            font-family: 'Clash Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: -0.025em;
+        }
+        
+        .logo-text::after {
+            content: 'VacantPro';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--hot-pink), var(--lime), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textReveal 3s forwards;
+            opacity: 0;
+        }
+        
+        @keyframes textReveal {
+            to { opacity: 1; }
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Clash Grotesk', sans-serif;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.025em;
+            color: var(--dark);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .role-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .role-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.25rem;
+            text-align: center;
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transform: translateY(0);
+            will-change: transform;
+        }
+        
+        .role-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: var(--border-radius);
+            padding: 2px;
+            background: linear-gradient(45deg, transparent, rgba(37, 99, 235, 0.1), transparent);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .role-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .role-card:hover::after {
+            opacity: 1;
+        }
+        
+        .role-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--hot-pink), var(--primary));
+            transition: var(--transition);
+        }
+        
+        .role-icon {
+            font-size: 3.25rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .role-card:hover .role-icon {
+            transform: scale(1.05);
+        }
+        
+        .role-icon i {
+            background: linear-gradient(135deg, var(--hot-pink), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .role-title {
+            font-size: 1.625rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .role-description {
+            color: var(--gray);
+            margin-bottom: 1.75rem;
+            line-height: 1.5;
+            font-size: 1.05rem;
+        }
+        
+        .btn {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 0.85rem 1.85rem;
+            border-radius: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            font-size: 1.05rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            width: 100%;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            text-transform: none;
+            letter-spacing: 0.025em;
+            transform: translateY(0);
+            will-change: transform;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn:hover::before {
+            opacity: 1;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(30deg);
+            z-index: 1;
+            pointer-events: none;
+            transition: all 0.5s;
+        }
+        
+        .btn:hover::after {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(30deg); }
+            100% { transform: translateX(100%) rotate(30deg); }
+        }
+        
+        .view-container {
+            display: none;
+        }
+        
+        .jobs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1.5rem;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            border-left: 4px solid var(--primary);
+            transform: translateY(0);
+            will-change: transform;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .job-card.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom right, rgba(255,255,255,0), rgba(37, 99, 235, 0.03));
+            z-index: 0;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .job-card:hover::before {
+            opacity: 1;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .job-header {
+            padding: 1.75rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .job-title {
+            font-size: 1.55rem;
+            margin-bottom: 0.65rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+        
+        .job-title:hover {
+            color: var(--primary);
+        }
+        
+        .job-title i {
+            color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .job-company {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.65rem;
+            font-size: 1.15rem;
+        }
+        
+        .job-meta {
+            display: flex;
+            gap: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 1.25rem;
+            font-size: 0.95rem;
+        }
+        
+        .job-body {
+            padding: 1.75rem;
+        }
+        
+        .job-description {
+            color: var(--gray);
+            margin-bottom: 1.75rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+        
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.75rem 1.75rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .job-salary {
+            background: linear-gradient(to right, var(--primary), var(--hot-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            font-size: 1.35rem;
+        }
+        
+        .job-expiry {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.35rem 0.95rem;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .expiry-soon {
+            background-color: #fffbeb;
+            color: #d97706;
+        }
+        
+        .expiry-normal {
+            background-color: #f0f9ff;
+            color: #1e40af;
+        }
+        
+        .expiry-critical {
+            background-color: #fee2e2;
+            color: #dc2626;
+        }
+        
+        .post-job-form {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 2.25rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .post-job-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary), var(--hot-pink), var(--lime));
+        }
+        
+        .form-group {
+            margin-bottom: 1.75rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.65rem;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 1.05rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.85rem 1.15rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            background-color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.85rem 1.75rem;
+            background: white;
+            border: 1px solid var(--light-gray);
+            border-radius: 12px;
+            color: var(--dark);
+            text-decoration: none;
+            margin-bottom: 1.75rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            font-weight: 500;
+            will-change: transform;
+        }
+        
+        .back-button:hover {
+            background: var(--lighter-gray);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Login and Registration Views */
+        .login-container {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, var(--primary), var(--hot-pink), var(--lime));
+        }
+        
+        .login-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 1.75rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .login-body {
+            padding: 2.25rem;
+        }
+        
+        .login-footer {
+            padding: 1.25rem 2.25rem;
+            background: #f8fafc;
+            border-top: 1px solid var(--light-gray);
+            text-align: center;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.75rem 0;
+        }
+        
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--light-gray);
+        }
+        
+        .divider-text {
+            padding: 0 1.25rem;
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .toggle-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        
+        .toggle-link:hover {
+            text-decoration: none;
+            color: var(--primary-dark);
+            transform: translateX(2px);
+        }
+        
+        .error-message {
+            display: none;
+            background: #fee2e2;
+            color: #b91c1c;
+            padding: 1.15rem;
+            border-radius: 12px;
+            margin: 1.75rem 0;
+            border-left: 4px solid #ef4444;
+            animation: errorShake 0.5s;
+        }
+        
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .success-message {
+            display: none;
+            background: #dcfce7;
+            color: #166534;
+            padding: 1.15rem;
+            border-radius: 12px;
+            margin: 1.75rem 0;
+            border-left: 4px solid #22c55e;
+        }
+        
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(8px);
+        }
+        
+        .loading-gears {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 2.5rem;
+        }
+        
+        .gear {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            position: relative;
+            animation: rotate 5s linear infinite;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.2);
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+        
+        .gear::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+        }
+        
+        .gear:nth-child(2) {
+            border-color: var(--hot-pink);
+            animation-direction: reverse;
+            animation-duration: 7s;
+        }
+        
+        .gear:nth-child(2)::after {
+            background: var(--hot-pink);
+            box-shadow: 0 0 10px rgba(236, 72, 153, 0.5);
+        }
+        
+        .gear:nth-child(3) {
+            border-color: var(--lime);
+            animation-duration: 9s;
+        }
+        
+        .gear:nth-child(3)::after {
+            background: var(--lime);
+            box-shadow: 0 0 10px rgba(132, 204, 22, 0.5);
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+            height: 2.8rem;
+            overflow: hidden;
+            font-family: 'Clash Grotesk', sans-serif;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            letter-spacing: -0.025em;
+        }
+        
+        .loading-letters {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            animation: dropLetters 3s infinite;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes dropLetters {
+            0%, 100% { top: 0; opacity: 1; }
+            25% { top: 2.5rem; opacity: 0.5; }
+            50% { top: 5rem; opacity: 0; }
+        }
+        
+        .walking-person {
+            position: fixed;
+            bottom: 20px;
+            left: -100px;
+            font-size: 2.2rem;
+            animation: walkAcross 18s linear infinite;
+            z-index: 100;
+            text-shadow: 0 0 10px rgba(37, 99, 235, 0.7);
+            opacity: 0.8;
+        }
+        
+        @keyframes walkAcross {
+            0% { left: -100px; }
+            100% { left: calc(100% + 100px); }
+        }
+        
+        .pulse {
+            animation: premiumPulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes premiumPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.1);
+            }
+            70% {
+                box-shadow: 0 0 0 12px rgba(37, 99, 235, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 99, 235, 0);
+            }
+        }
+        
+        .glass-effect {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hero-text {
+            font-family: 'Clash Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            line-height: 1.1;
+            letter-spacing: -0.025em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, white, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-briefcase"></i>
+                <span class="logo-text">VacantPro</span>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <!-- Role Selection View -->
+        <div id="roleSelection" class="view-container" style="display: block;">
+            <h1 style="text-align: center; margin-bottom: 2.5rem; color: var(--dark); font-weight: 600;">Welcome to VacantPro</h1>
+            <div class="role-selection">
+                <div class="role-card pulse" onclick="showEmployeeView()">
+                    <div class="role-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h2 class="role-title">Access as Employee</h2>
+                    <p class="role-description">Browse and apply for job opportunities across the nation with our streamlined application process</p>
+                    <button class="btn">
+                        <i class="fas fa-arrow-right"></i> Continue
+                    </button>
+                </div>
+                <div class="role-card pulse" onclick="showEmployerLogin()">
+                    <div class="role-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h2 class="role-title">Access as Employer</h2>
+                    <p class="role-description">Post new job vacancies and find qualified candidates with our advanced matching system</p>
+                    <button class="btn">
+                        <i class="fas fa-arrow-right"></i> Continue
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Employee View -->
+        <div id="employeeView" class="view-container">
+            <a href="#" class="back-button" onclick="showRoleSelection(); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Selection
+            </a>
+            <h1 style="color: var(--dark); margin-bottom: 1.75rem;">Available Job Opportunities</h1>
+            <div class="jobs-container" id="jobsList">
+                <div style="text-align: center; padding: 2.5rem; color: var(--gray); grid-column: 1 / -1;">
+                    <div class="loading-spinner" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p style="font-size: 1.1rem;">Loading premium job vacancies...</p>
+                </div>
+            </div>
+        </div>
+        <!-- Login View -->
+        <div id="loginView" class="view-container">
+            <a href="#" class="back-button" onclick="showRoleSelection(); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Selection
+            </a>
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="logo" style="justify-content: center; gap: 12px; color: white; margin-bottom: 0.75rem;">
+                        <i class="fas fa-briefcase" style="font-size: 1.75rem;"></i>
+                        <span style="font-size: 1.75rem; font-family: 'Clash Grotesk', sans-serif; letter-spacing: -0.025em;">VacantPro</span>
+                    </div>
+                    <h2 style="font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem;">Employer Login</h2>
+                    <p style="opacity: 0.9; font-size: 1.05rem;">Access your premium employer dashboard</p>
+                </div>
+                <div class="login-body">
+                    <div class="error-message" id="loginErrorMessage">
+                        <i class="fas fa-exclamation-circle"></i> <span>Invalid email or password</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-envelope" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your professional email" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your secure password" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <button class="btn" style="width: 100%;" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Log In
+                    </button>
+                    <div class="divider">
+                        <div class="divider-line"></div>
+                        <div class="divider-text">OR CONTINUE WITH</div>
+                        <div class="divider-line"></div>
+                    </div>
+                    <button class="btn" style="width: 100%; background: white; color: var(--primary); border: 1px solid var(--primary-light); box-shadow: var(--shadow-sm);" onclick="showRegister()">
+                        <i class="fab fa-google"></i> Sign in with Google
+                    </button>
+                </div>
+                <div class="login-footer">
+                    <p style="font-size: 1.05rem;">Don't have an account? <a href="#" class="toggle-link" onclick="showRegister()">Create Professional Account</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Register View -->
+        <div id="registerView" class="view-container">
+            <a href="#" class="back-button" onclick="showRoleSelection(); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Selection
+            </a>
+            <div class="login-container">
+                <div class="login-header">
+                    <div class="logo" style="justify-content: center; gap: 12px; color: white; margin-bottom: 0.75rem;">
+                        <i class="fas fa-briefcase" style="font-size: 1.75rem;"></i>
+                        <span style="font-size: 1.75rem; font-family: 'Clash Grotesk', sans-serif; letter-spacing: -0.025em;">VacantPro</span>
+                    </div>
+                    <h2 style="font-size: 1.75rem; font-weight: 600; margin-bottom: 0.5rem;">Employer Registration</h2>
+                    <p style="opacity: 0.9; font-size: 1.05rem;">Create your professional employer account</p>
+                </div>
+                <div class="login-body">
+                    <div class="error-message" id="registerErrorMessage">
+                        <i class="fas fa-exclamation-circle"></i> <span>Please check your information</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerCompany">Company Name</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-building" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="text" class="form-control" id="registerCompany" placeholder="Enter your professional company name" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email Address</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-envelope" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="email" class="form-control" id="registerEmail" placeholder="Enter your professional email" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Password</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="Create a secure password" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-lock" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your secure password" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPhone">Phone Number</label>
+                        <div style="position: relative;">
+                            <i class="fas fa-phone" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--gray);"></i>
+                            <input type="tel" class="form-control" id="registerPhone" placeholder="Enter your professional phone number" style="padding-left: 45px;" required>
+                        </div>
+                    </div>
+                    <button class="btn" style="width: 100%;" id="registerBtn">
+                        <i class="fas fa-user-plus"></i> Create Professional Account
+                    </button>
+                    <div class="divider">
+                        <div class="divider-line"></div>
+                        <div class="divider-text">OR CONTINUE WITH</div>
+                        <div class="divider-line"></div>
+                    </div>
+                    <button class="btn" style="width: 100%; background: white; color: var(--primary); border: 1px solid var(--primary-light); box-shadow: var(--shadow-sm);" onclick="showLogin()">
+                        <i class="fab fa-google"></i> Sign up with Google
+                    </button>
+                </div>
+                <div class="login-footer">
+                    <p style="font-size: 1.05rem;">By creating an account, you agree to our <a href="#" class="toggle-link">Terms of Service</a> and <a href="#" class="toggle-link">Privacy Policy</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Employer Dashboard -->
+        <div id="employerDashboard" class="view-container">
+            <a href="#" class="back-button" onclick="showRoleSelection(); return false;">
+                <i class="fas fa-arrow-left"></i> Back to Selection
+            </a>
+            <h1 style="color: var(--dark); margin-bottom: 1.75rem;">Employer Dashboard</h1>
+            <div class="post-job-form">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.75rem;">
+                    <h2 style="color: var(--dark); font-weight: 600;">Post a New Job Vacancy</h2>
+                    <span style="background: linear-gradient(135deg, var(--primary), var(--hot-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; padding: 0.35rem 0.95rem; border-radius: 20px; font-size: 0.95rem;">Premium Feature</span>
+                </div>
+                <div class="success-message" id="postSuccessMessage" style="display: none;">
+                    <i class="fas fa-check-circle"></i> <strong>Success!</strong> Job vacancy has been posted successfully.
+                </div>
+                <div class="error-message" id="postErrorMessage" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i> <span id="postErrorText">Failed to post job vacancy</span>
+                </div>
+                <form id="jobPostForm">
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" class="form-control" id="companyName" placeholder="Enter your professional company name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobTitle">Job Title</label>
+                        <input type="text" class="form-control" id="jobTitle" placeholder="Enter job title (e.g., Senior Software Engineer)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobLocation">Location</label>
+                        <input type="text" class="form-control" id="jobLocation" placeholder="Enter job location (City, State)" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobType">Job Type</label>
+                        <select class="form-control" id="jobType" required>
+                            <option value="">Select job type</option>
+                            <option value="full-time">Full-time</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="contract">Contract</option>
+                            <option value="remote">Remote</option>
+                            <option value="internship">Internship</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">Salary Range</label>
+                        <input type="text" class="form-control" id="salary" placeholder="e.g. $90,000 - $120,000 per year" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="jobDescription">Job Description</label>
+                        <textarea class="form-control" id="jobDescription" rows="6" placeholder="Describe the job responsibilities and requirements in detail..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="applicationDeadline">Application Deadline</label>
+                        <input type="date" class="form-control" id="applicationDeadline" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email</label>
+                        <input type="email" class="form-control" id="contactEmail" placeholder="Enter contact email for applicants" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Contact Phone Number</label>
+                        <input type="tel" class="form-control" id="contactPhone" placeholder="Enter contact phone number" required>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Post Premium Job Vacancy
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="container" style="padding-top: 3rem; padding-bottom: 2rem;">
+            <p style="text-align: center; color: var(--gray); font-size: 0.95rem; margin-bottom: 0.5rem;">© 2023 VacantPro | National Job Search Platform | A Government of [Country] Initiative</p>
+            <p style="text-align: center; color: var(--gray); font-size: 0.9rem;">Developed under Government Tender #VP-2023-10K | All Rights Reserved</p>
+        </div>
+    </footer>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-gears">
+            <div class="gear"></div>
+            <div class="gear"></div>
+            <div class="gear"></div>
+        </div>
+        <div class="loading-text">
+            <div class="loading-letters">VacantPro</div>
+            <div class="loading-letters">VacantPro</div>
+            <div class="loading-letters">VacantPro</div>
+        </div>
+    </div>
+    <!-- Walking Person -->
+    <div class="walking-person">
+        <i class="fas fa-user"></i><i class="fas fa-suitcase"></i>
+    </div>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUsym33l97AQPzfE_hXRzv_JNeuqmOGvQ",
+            authDomain: "sos-chat-9ab75.firebaseapp.com",
+            projectId: "sos-chat-9ab75",
+            storageBucket: "sos-chat-9ab75.firebasestorage.app",
+            messagingSenderId: "676000840736",
+            appId: "1:676000840736:web:4dc3ada034d2a026309045",
+            measurementId: "G-6MQQ8G37DH"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        const auth = firebase.auth();
+        // View functions
+        function showRoleSelection() {
+            document.getElementById('roleSelection').style.display = 'block';
+            document.getElementById('employeeView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('registerView').style.display = 'none';
+            document.getElementById('employerDashboard').style.display = 'none';
+        }
+        function showEmployeeView() {
+            document.getElementById('roleSelection').style.display = 'none';
+            document.getElementById('employeeView').style.display = 'block';
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('registerView').style.display = 'none';
+            document.getElementById('employerDashboard').style.display = 'none';
+            // Load jobs from Firestore
+            document.getElementById('jobsList').innerHTML = `
+                <div style="text-align: center; padding: 2.5rem; color: var(--gray); grid-column: 1 / -1;">
+                    <div class="loading-spinner" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--primary);">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <p style="font-size: 1.1rem;">Loading premium job vacancies...</p>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                db.collection("job_vacancies")
+                  .orderBy("postedDate", "desc")
+                  .get()
+                  .then((querySnapshot) => {
+                    let jobsHTML = '';
+                    if (querySnapshot.empty) {
+                        jobsHTML = `
+                            <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem; color: var(--gray);">
+                                <i class="fas fa-inbox" style="font-size: 3.5rem; margin-bottom: 1.5rem; opacity: 0.5;"></i>
+                                <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--dark);">No job vacancies found</h3>
+                                <p style="font-size: 1.1rem;">Check back later as new premium opportunities are posted regularly</p>
+                            </div>
+                        `;
+                    } else {
+                        querySnapshot.forEach((doc, index) => {
+                            const job = doc.data();
+                            const deadline = new Date(job.deadline);
+                            const today = new Date();
+                            // Skip expired jobs
+                            if (deadline < today) {
+                                return;
+                            }
+                            
+                            // Add animation delay for staggered entrance
+                            setTimeout(() => {
+                                const card = document.createElement('div');
+                                card.className = 'job-card';
+                                card.innerHTML = `
+                                    <div class="job-header">
+                                        <h3 class="job-title"><i class="fas fa-briefcase"></i> ${job.jobTitle}</h3>
+                                        <div class="job-company">${job.companyName}</div>
+                                        <div class="job-meta">
+                                            <span><i class="fas fa-map-marker-alt"></i> ${job.location}</span>
+                                            <span><i class="fas fa-clock"></i> ${job.jobType}</span>
+                                        </div>
+                                    </div>
+                                    <div class="job-body">
+                                        <p class="job-description">${job.description}</p>
+                                    </div>
+                                    <div class="job-footer">
+                                        <div class="job-salary">${job.salary}</div>
+                                        <div>Deadline: ${job.deadline}</div>
+                                    </div>
+                                `;
+                                card.style.animationDelay = (index * 0.1) + 's';
+                                document.getElementById('jobsList').appendChild(card);
+                                setTimeout(() => {
+                                    card.classList.add('appear');
+                                }, 50);
+                            }, index * 50);
+                        });
+                        return;
+                    }
+                    document.getElementById('jobsList').innerHTML = jobsHTML;
+                  })
+                  .catch((error) => {
+                    document.getElementById('jobsList').innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 2.5rem; color: var(--gray);">
+                            <i class="fas fa-exclamation-circle" style="font-size: 3.5rem; margin-bottom: 1.5rem; color: #dc2626;"></i>
+                            <h3 style="font-size: 1.75rem; margin-bottom: 1rem; color: var(--dark);">Error loading job vacancies</h3>
+                            <p style="font-size: 1.1rem;">Failed to load job  ${error.message}</p>
+                        </div>
+                    `;
+                  });
+            }, 500);
+        }
+        function showEmployerLogin() {
+            document.getElementById('roleSelection').style.display = 'none';
+            document.getElementById('employeeView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'block';
+            document.getElementById('registerView').style.display = 'none';
+            document.getElementById('employerDashboard').style.display = 'none';
+            // Set today as minimum date for deadline
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('applicationDeadline').min = today;
+        }
+        function showLogin() {
+            document.getElementById('roleSelection').style.display = 'none';
+            document.getElementById('employeeView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'block';
+            document.getElementById('registerView').style.display = 'none';
+            document.getElementById('employerDashboard').style.display = 'none';
+        }
+        function showRegister() {
+            document.getElementById('roleSelection').style.display = 'none';
+            document.getElementById('employeeView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('registerView').style.display = 'block';
+            document.getElementById('employerDashboard').style.display = 'none';
+        }
+        function showEmployerDashboard() {
+            document.getElementById('roleSelection').style.display = 'none';
+            document.getElementById('employeeView').style.display = 'none';
+            document.getElementById('loginView').style.display = 'none';
+            document.getElementById('registerView').style.display = 'none';
+            document.getElementById('employerDashboard').style.display = 'block';
+        }
+        // Login functionality
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            if (!email || !password) {
+                document.getElementById('loginErrorMessage').style.display = 'block';
+                return;
+            }
+            auth.signInWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    showEmployerDashboard();
+                })
+                .catch((error) => {
+                    document.getElementById('loginErrorMessage').style.display = 'block';
+                });
+        });
+        // Registration functionality
+        document.getElementById('registerBtn').addEventListener('click', function() {
+            const company = document.getElementById('registerCompany').value;
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const phone = document.getElementById('registerPhone').value;
+            if (!company || !email || !password || !confirmPassword || !phone) {
+                document.getElementById('registerErrorMessage').style.display = 'block';
+                return;
+            }
+            if (password !== confirmPassword) {
+                document.getElementById('registerErrorMessage').innerHTML = 
+                    '<i class="fas fa-exclamation-circle"></i> Passwords do not match';
+                document.getElementById('registerErrorMessage').style.display = 'block';
+                return;
+            }
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    // Store additional user data in Firestore
+                    db.collection("employers").doc(userCredential.user.uid).set({
+                        companyName: company,
+                        email: email,
+                        phone: phone,
+                        createdAt: new Date()
+                    })
+                    .then(() => {
+                        showEmployerDashboard();
+                    })
+                    .catch((error) => {
+                        document.getElementById('registerErrorMessage').innerHTML = 
+                            '<i class="fas fa-exclamation-circle"></i> Error creating account: ' + error.message;
+                        document.getElementById('registerErrorMessage').style.display = 'block';
+                    });
+                })
+                .catch((error) => {
+                    document.getElementById('registerErrorMessage').innerHTML = 
+                        '<i class="fas fa-exclamation-circle"></i> Error creating account: ' + error.message;
+                    document.getElementById('registerErrorMessage').style.display = 'block';
+                });
+        });
+        // Post job form submission
+        document.getElementById('jobPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const companyName = document.getElementById('companyName').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const jobLocation = document.getElementById('jobLocation').value;
+            const jobType = document.getElementById('jobType').value;
+            const salary = document.getElementById('salary').value;
+            const jobDescription = document.getElementById('jobDescription').value;
+            const applicationDeadline = document.getElementById('applicationDeadline').value;
+            const contactEmail = document.getElementById('contactEmail').value;
+            const contactPhone = document.getElementById('contactPhone').value;
+            if (!companyName || !jobTitle || !jobLocation || !jobType || !salary || !jobDescription || !applicationDeadline || !contactEmail || !contactPhone) {
+                document.getElementById('postErrorText').textContent = 'Please fill in all fields';
+                document.getElementById('postErrorMessage').style.display = 'block';
+                return;
+            }
+            const deadlineDate = new Date(applicationDeadline);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (deadlineDate < today) {
+                document.getElementById('postErrorText').textContent = 'Deadline must be today or in the future';
+                document.getElementById('postErrorMessage').style.display = 'block';
+                return;
+            }
+            // Get current user
+            const user = auth.currentUser;
+            if (!user) {
+                document.getElementById('postErrorText').textContent = 'You must be logged in to post a job';
+                document.getElementById('postErrorMessage').style.display = 'block';
+                return;
+            }
+            // Add job to Firestore
+            db.collection("job_vacancies").add({
+                companyName: companyName,
+                jobTitle: jobTitle,
+                location: jobLocation,
+                jobType: jobType,
+                salary: salary,
+                description: jobDescription,
+                deadline: applicationDeadline,
+                contactEmail: contactEmail,
+                contactPhone: contactPhone,
+                postedDate: new Date(),
+                status: "active",
+                employerId: user.uid
+            })
+            .then((docRef) => {
+                // Show success message
+                document.getElementById('postSuccessMessage').style.display = 'block';
+                // Reset form
+                document.getElementById('jobPostForm').reset();
+                // Hide success message after 3 seconds
+                setTimeout(function() {
+                    document.getElementById('postSuccessMessage').style.display = 'none';
+                }, 3000);
+            })
+            .catch((error) => {
+                document.getElementById('postErrorText').textContent = 'Error posting job: ' + error.message;
+                document.getElementById('postErrorMessage').style.display = 'block';
+            });
+        });
+        // Check auth state on page load
+        window.addEventListener('load', function() {
+            // Show loading overlay for 2 seconds
+            setTimeout(() => {
+                document.getElementById('loadingOverlay').style.opacity = '0';
+                document.getElementById('loadingOverlay').style.pointerEvents = 'none';
+                setTimeout(() => {
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                }, 500);
+            }, 2000);
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    // User is signed in
+                    db.collection("employers").doc(user.uid).get()
+                        .then((doc) => {
+                            if (doc.exists) {
+                                // User is a valid employer
+                                showEmployerDashboard();
+                            }
+                        })
+                        .catch((error) => {
+                            console.log("Error checking employer account:", error);
+                        });
+                }
+            });
+        });
+        
+        // Add staggered animation for job cards
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.job-card');
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('appear');
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
